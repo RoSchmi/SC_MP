@@ -1,7 +1,7 @@
 # // SerialOut.scmp
 # // This program for SC/MP (No fixed Startaddress, usually $2000)
 # // Writes part of the Ram content through the serial interface
-# // Baudrate = 600 and cannot be changes
+# // Baudrate = 600 and cannot be changed
 
         .LF     SerialOut.scmp.lst
 
@@ -71,21 +71,14 @@ SerialWrite
         LDI #$58        
         DLY $01
            
-        LD $15(2)      // Startsaddr. (and following) in Ptr I
-        XPAL 1
-        LD $14(2)
-        XPAH 1
-        LD (1)         // Load Databyte
-        ST $07(2)      // store in Stackbase + 7
-
-        #//LDI #$00        // Ptr I on LEDs
+        #//LD $15(2)      // Startsaddr. (and following) in Ptr I
         #//XPAL 1
-        #//LDI #$11
-        #// XPAH 1  
+        #//LD $14(2)
+        #//XPAH 1
+        #//LD (1)         // Load Databyte
 
-        LD $07(2)
-        #//ST (1)
-        #//HALT
+        LD $07(2)       // get from Stackbase + 7  
+        #//ST $07(2)      // store in Stackbase + 7     
         XAE
 
 L1      SIO       

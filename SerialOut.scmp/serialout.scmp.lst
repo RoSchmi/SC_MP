@@ -52,7 +52,7 @@ Source file: c:\users\roland\source\sc_mp\serialout.scmp\serialout.scmp.asm
 
 2022-02               41 (   5)         CCL
 2023-                 42
-2023-90 4F            43 (  11)         JMP CONT
+2023-90 45            43 (  11)         JMP CONT
 2025-08               44 (   5)         Nop
 2026-08               45 (   5)     Nop
 2027-                 46
@@ -83,151 +83,144 @@ Source file: c:\users\roland\source\sc_mp\serialout.scmp\serialout.scmp.asm
 2047-C4 58            71 (  10)         LDI #$58
 2049-8F 01            72 ( 13+)         DLY $01
 204B-                 73
-204B-C2 15            74 (  18)         LD $15(2)      // Startsaddr. (and following) in Ptr I
-204D-31               75 (   8)         XPAL 1
-204E-C2 14            76 (  18)         LD $14(2)
-2050-35               77 (   8)         XPAH 1
-2051-C1 00            78 (  18)         LD (1)         // Load Databyte
-2053-CA 07            79 (  18)         ST $07(2)      // store in Stackbase + 7
-2055-                 80
-2055-                 81                #//LDI #$00        // Ptr I on LEDs
-2055-                 82                #//XPAL 1
-2055-                 83                #//LDI #$11
-2055-                 84                #// XPAH 1
-2055-                 85
-2055-C2 07            86 (  18)         LD $07(2)
-2057-                 87                #//ST (1)
-2057-                 88                #//HALT
-2057-01               89 (   7)         XAE
-2058-                 90
-2058-19               91 (   5) L1      SIO
-2059-                 92                #//LDI #$62   // other timeconstant
-2059-C4 69            93 (  10)         LDI #$69
-205B-8F 01            94 ( 13+)         DLY $01
-205D-40               95 (   6)         LDE
-205E-DC 80            96 (  10)         ORI #$80
-2060-01               97 (   7)         XAE
-2061-BA 08            98 (  22)         DLD $08(2)
-2063-9C F3            99 (9/11)         JNZ L1
-2065-                100
-2065-C4 FF           101 (  10)         LDI #$FF    // 2 Stop Bits
-2067-01              102 (   7)         XAE
-2068-19              103 (   5)         SIO
-2069-C4 62           104 (  10)         LDI #$62
-206B-8F 01           105 ( 13+)         DLY $01
-206D-C4 62           106 (  10)         LDI #$62
-206F-8F 01           107 ( 13+)         DLY $01
-2071-3F              108 (   7)         XPPC 3
-2072-90 B3           109 (  11)         JMP SerialWrite
-2074-                110
-2074-                111        #//*************************************************************
-2074-                112
-2074-C4 00           113 (  10) CONT    LDI #$00        // Ptr I auf LEDs
-2076-31              114 (   8)         XPAL 1
-2077-C4 11           115 (  10)         LDI #$11
-2079-35              116 (   8)         XPAH 1
-207A-                117
-207A-C4 C0           118 (  10)         LDI #$C0        // $C0 an LEDS, schaltet seriellen Ausgang frei
-207C-C9 00           119 (  18)         ST (1)
-207E-                120
-207E-C4 00           121 (  10)         LDI #$00        // Ptr I auf Display
-2080-31              122 (   8)         XPAL 1
-2081-C4 07           123 (  10)         LDI #$07
-2083-35              124 (   8)         XPAH 1
-2084-C4 5F           125 (  10)         LDI #$5F
-2086-C9 07           126 (  18)         ST $07(1)
-2088-C4 5E           127 (  10)         LDI #$5E
-208A-C9 06           128 (  18)         ST $06(1)
-208C-C4 80           129 (  10)         LDI #$80
-208E-C9 05           130 (  18)         ST $05(1)
-2090-C9 04           131 (  18)         ST $04(1)
-2092-C9 03           132 (  18)         ST $03(1)
-2094-C9 02           133 (  18)         ST $02(1)
-2096-C4 00           134 (  10)         LDI #$00
-2098-C9 01           135 (  18)         ST $01(1)
-209A-C9 00           136 (  18)         ST $00(1)
-209C-                137
-209C-C4 3E           138 (  10)         LDI #$3E        // Adr. von Gethex - 1  (=0x0055) in Rout.Adr.
+204B-                 74                #//LD $15(2)      // Startsaddr. (and following) in Ptr I
+204B-                 75                #//XPAL 1
+204B-                 76                #//LD $14(2)
+204B-                 77                #//XPAH 1
+204B-                 78                #//LD (1)         // Load Databyte
+204B-                 79
+204B-C2 07            80 (  18)         LD $07(2)       // get from Stackbase + 7
+204D-                 81                #//ST $07(2)      // store in Stackbase + 7
+204D-01               82 (   7)         XAE
+204E-                 83
+204E-19               84 (   5) L1      SIO
+204F-                 85                #//LDI #$62   // other timeconstant
+204F-C4 69            86 (  10)         LDI #$69
+2051-8F 01            87 ( 13+)         DLY $01
+2053-40               88 (   6)         LDE
+2054-DC 80            89 (  10)         ORI #$80
+2056-01               90 (   7)         XAE
+2057-BA 08            91 (  22)         DLD $08(2)
+2059-9C F3            92 (9/11)         JNZ L1
+205B-                 93
+205B-C4 FF            94 (  10)         LDI #$FF    // 2 Stop Bits
+205D-01               95 (   7)         XAE
+205E-19               96 (   5)         SIO
+205F-C4 62            97 (  10)         LDI #$62
+2061-8F 01            98 ( 13+)         DLY $01
+2063-C4 62            99 (  10)         LDI #$62
+2065-8F 01           100 ( 13+)         DLY $01
+2067-3F              101 (   7)         XPPC 3
+2068-90 BD           102 (  11)         JMP SerialWrite
+206A-                103
+206A-                104        #//*************************************************************
+206A-                105
+206A-C4 00           106 (  10) CONT    LDI #$00        // Ptr I auf LEDs
+206C-31              107 (   8)         XPAL 1
+206D-C4 11           108 (  10)         LDI #$11
+206F-35              109 (   8)         XPAH 1
+2070-                110
+2070-C4 C0           111 (  10)         LDI #$C0        // $C0 an LEDS, schaltet seriellen Ausgang frei
+2072-C9 00           112 (  18)         ST (1)
+2074-                113
+2074-C4 00           114 (  10)         LDI #$00        // Ptr I auf Display
+2076-31              115 (   8)         XPAL 1
+2077-C4 07           116 (  10)         LDI #$07
+2079-35              117 (   8)         XPAH 1
+207A-C4 5F           118 (  10)         LDI #$5F
+207C-C9 07           119 (  18)         ST $07(1)
+207E-C4 5E           120 (  10)         LDI #$5E
+2080-C9 06           121 (  18)         ST $06(1)
+2082-C4 80           122 (  10)         LDI #$80
+2084-C9 05           123 (  18)         ST $05(1)
+2086-C9 04           124 (  18)         ST $04(1)
+2088-C9 03           125 (  18)         ST $03(1)
+208A-C9 02           126 (  18)         ST $02(1)
+208C-C4 00           127 (  10)         LDI #$00
+208E-C9 01           128 (  18)         ST $01(1)
+2090-C9 00           129 (  18)         ST $00(1)
+2092-                130
+2092-C4 3E           131 (  10)         LDI #$3E        // Adr. von Gethex - 1  (=0x0055) in Rout.Adr.
 *** Error: Out of range
-    139         ST $FE(2)
+    132         ST $FE(2)
 
-20A0-C4 02           140 (  10)         LDI #$02
+2096-C4 02           133 (  10)         LDI #$02
 *** Error: Out of range
-    141         ST $FD(2)
+    134         ST $FD(2)
 
-20A4-C4 55           142 (  10)         LDI #$55        // Adr. von Push -1 (=0x0055) in Ptr III
-20A6-33              143 (   8)         XPAL 3
-20A7-C4 00           144 (  10)         LDI #$00
-20A9-37              145 (   8)         XPAH 3
-20AA-3F              146 (   7)         XPPC 3          // Anfangsdresse von Keyboard holen
-20AB-                147
-20AB-C4 E0           148 (  10)         LDI #$E0
-20AD-32              149 (   8)         XPAL 2          // Pointer II auf Stackbase Adr. 0x0FE0 (steht vorher auf 0FFF)
-20AE-C4 0F           150 (  10)         LDI #$0F
-20B0-36              151 (   8)         XPAH 2
-20B1-C2 01           152 (  18)         LD $01(2)       // Anfangsadr in 0x0FF5 und 0xFF4 sichern
-20B3-CA 15           153 (  18)         ST $15(2)
-20B5-C2 02           154 (  18)         LD $02(2)
-20B7-CA 14           155 (  18)         ST $14(2)
-20B9-3F              156 (   7)         XPPC 3          // Endadr. von Keyboard holen
-20BA-C2 01           157 (  18)         LD $01(2)
-20BC-CA 13           158 (  18)         ST $13(2)       // Endadr in 0x0FF3 und 0xFF2 sichern
-20BE-C2 02           159 (  18)         LD $02(2)
-20C0-CA 12           160 (  18)         ST $12(2)
-20C2-                161
-20C2-C2 10           162 (  18) LOOP    LD $10(2)     // Load address of SerialWrite (low) in ROUTAD
-20C4-                163
-20C4-CA 1D           164 (  18)         ST $1D(2)
-20C6-C2 11           165 (  18)         LD $11(2)     // Load address of SerialWrite (high) in ROUTAD
-20C8-                166
-20C8-CA 1C           167 (  18)         ST $1C(2)
-20CA-C4 55           168 (  10)         LDI #$55        // Adr. von Push -1 (=0x0055) in Ptr III
-20CC-33              169 (   8)         XPAL 3
-20CD-C4 00           170 (  10)         LDI #$00
-20CF-37              171 (   8)         XPAH 3
-20D0-                172
-20D0-C2 15           173 (  18)         LD $15(2)
-20D2-31              174 (   8)         XPAL 1
-20D3-C2 14           175 (  18)         LD $14(2)
-20D5-35              176 (   8)         XPAH 1
-20D6-C1 00           177 (  18)         LD (1)          // Load DataByte
-20D8-CA 07           178 (  18)         ST $07(2)
-20DA-                179               #// LD (1)          // Load DataByte
-20DA-                180
-20DA-3F              181 (   7)         XPPC 3          // Byte ausgeben
-20DB-                182
-20DB-C4 E0           183 (  10)         LDI #$E0
-20DD-32              184 (   8)         XPAL 2          // Pointer II auf Stackbase
-20DE-C4 0F           185 (  10)         LDI #$0F
-20E0-36              186 (   8)         XPAH 2
-20E1-                187
-20E1-C2 13           188 (  18)         LD $13(2)      // Adresse = Endadresse ?
-20E3-03              189 (   5)         SCL
-20E4-FA 15           190 (  20)         CAD $15(2)
-20E6-9C 12           191 (9/11)         JNZ Weiter1
-20E8-C2 12           192 (  18)         LD $12(2)
-20EA-FA 14           193 (  20)         CAD $14(2)
-20EC-9C 0C           194 (9/11)         JNZ Weiter1
-20EE-C4 00           195 (  10)         LDI #$00        // Ptr I auf LEDs
-20F0-31              196 (   8)         XPAL 1
-20F1-C4 11           197 (  10)         LDI #$11
-20F3-35              198 (   8)         XPAH 1
-20F4-C4 00           199 (  10)         LDI #$00
-20F6-C9 00           200 (  18)         ST (1)
-20F8-92 30           201 (  11)         JMP $30(2)   // ja: Elbug anspringen
-20FA-02              202 (   5) Weiter1 CCL
-20FB-C2 15           203 (  18)         LD $15(2)    // Anfangsadresse incrementieren
-20FD-F4 01           204 (  11)         ADI $01
-20FF-CA 15           205 (  18)         ST $15(2)
-2101-C2 14           206 (  18)         LD $14(2)
-2103-F4 00           207 (  11)         ADI $00
-2105-CA 14           208 (  18)         ST $14(2)
-2107-02              209 (   5)         CCL
-2108-90 B8           210 (  11)         JMP LOOP
-210A-                211
-210A-                212
-210A-                213
-210A-                214
-210A-                215
-210A-                216
-210A-                217
+209A-C4 55           135 (  10)         LDI #$55        // Adr. von Push -1 (=0x0055) in Ptr III
+209C-33              136 (   8)         XPAL 3
+209D-C4 00           137 (  10)         LDI #$00
+209F-37              138 (   8)         XPAH 3
+20A0-3F              139 (   7)         XPPC 3          // Anfangsdresse von Keyboard holen
+20A1-                140
+20A1-C4 E0           141 (  10)         LDI #$E0
+20A3-32              142 (   8)         XPAL 2          // Pointer II auf Stackbase Adr. 0x0FE0 (steht vorher auf 0FFF)
+20A4-C4 0F           143 (  10)         LDI #$0F
+20A6-36              144 (   8)         XPAH 2
+20A7-C2 01           145 (  18)         LD $01(2)       // Anfangsadr in 0x0FF5 und 0xFF4 sichern
+20A9-CA 15           146 (  18)         ST $15(2)
+20AB-C2 02           147 (  18)         LD $02(2)
+20AD-CA 14           148 (  18)         ST $14(2)
+20AF-3F              149 (   7)         XPPC 3          // Endadr. von Keyboard holen
+20B0-C2 01           150 (  18)         LD $01(2)
+20B2-CA 13           151 (  18)         ST $13(2)       // Endadr in 0x0FF3 und 0xFF2 sichern
+20B4-C2 02           152 (  18)         LD $02(2)
+20B6-CA 12           153 (  18)         ST $12(2)
+20B8-                154
+20B8-C2 10           155 (  18) LOOP    LD $10(2)     // Load address of SerialWrite (low) in ROUTAD
+20BA-                156
+20BA-CA 1D           157 (  18)         ST $1D(2)
+20BC-C2 11           158 (  18)         LD $11(2)     // Load address of SerialWrite (high) in ROUTAD
+20BE-                159
+20BE-CA 1C           160 (  18)         ST $1C(2)
+20C0-C4 55           161 (  10)         LDI #$55        // Adr. von Push -1 (=0x0055) in Ptr III
+20C2-33              162 (   8)         XPAL 3
+20C3-C4 00           163 (  10)         LDI #$00
+20C5-37              164 (   8)         XPAH 3
+20C6-                165
+20C6-C2 15           166 (  18)         LD $15(2)
+20C8-31              167 (   8)         XPAL 1
+20C9-C2 14           168 (  18)         LD $14(2)
+20CB-35              169 (   8)         XPAH 1
+20CC-C1 00           170 (  18)         LD (1)          // Load DataByte
+20CE-CA 07           171 (  18)         ST $07(2)
+20D0-                172               #// LD (1)          // Load DataByte
+20D0-                173
+20D0-3F              174 (   7)         XPPC 3          // Byte ausgeben
+20D1-                175
+20D1-C4 E0           176 (  10)         LDI #$E0
+20D3-32              177 (   8)         XPAL 2          // Pointer II auf Stackbase
+20D4-C4 0F           178 (  10)         LDI #$0F
+20D6-36              179 (   8)         XPAH 2
+20D7-                180
+20D7-C2 13           181 (  18)         LD $13(2)      // Adresse = Endadresse ?
+20D9-03              182 (   5)         SCL
+20DA-FA 15           183 (  20)         CAD $15(2)
+20DC-9C 12           184 (9/11)         JNZ Weiter1
+20DE-C2 12           185 (  18)         LD $12(2)
+20E0-FA 14           186 (  20)         CAD $14(2)
+20E2-9C 0C           187 (9/11)         JNZ Weiter1
+20E4-C4 00           188 (  10)         LDI #$00        // Ptr I auf LEDs
+20E6-31              189 (   8)         XPAL 1
+20E7-C4 11           190 (  10)         LDI #$11
+20E9-35              191 (   8)         XPAH 1
+20EA-C4 00           192 (  10)         LDI #$00
+20EC-C9 00           193 (  18)         ST (1)
+20EE-92 30           194 (  11)         JMP $30(2)   // ja: Elbug anspringen
+20F0-02              195 (   5) Weiter1 CCL
+20F1-C2 15           196 (  18)         LD $15(2)    // Anfangsadresse incrementieren
+20F3-F4 01           197 (  11)         ADI $01
+20F5-CA 15           198 (  18)         ST $15(2)
+20F7-C2 14           199 (  18)         LD $14(2)
+20F9-F4 00           200 (  11)         ADI $00
+20FB-CA 14           201 (  18)         ST $14(2)
+20FD-02              202 (   5)         CCL
+20FE-90 B8           203 (  11)         JMP LOOP
+2100-                204
+2100-                205
+2100-                206
+2100-                207
+2100-                208
+2100-                209
+2100-                210
