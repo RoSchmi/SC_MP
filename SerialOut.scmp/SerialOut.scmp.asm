@@ -70,15 +70,9 @@ SerialWrite
         SIO             // Output Startbit     
         LDI #$58        
         DLY $01
-           
-        #//LD $15(2)      // Startsaddr. (and following) in Ptr I
-        #//XPAL 1
-        #//LD $14(2)
-        #//XPAH 1
-        #//LD (1)         // Load Databyte
-
+    
         LD $07(2)       // get from Stackbase + 7  
-        #//ST $07(2)      // store in Stackbase + 7     
+         
         XAE
 
 L1      SIO       
@@ -152,11 +146,9 @@ CONT    LDI #$00        // Ptr I auf LEDs
         LD $02(2)
         ST $12(2)
 
-LOOP    LD $10(2)     // Load address of SerialWrite (low) in ROUTAD
-        
+LOOP    LD $10(2)     // Load address of SerialWrite (low) in ROUTAD      
         ST $1D(2)
-        LD $11(2)     // Load address of SerialWrite (high) in ROUTAD
-        
+        LD $11(2)     // Load address of SerialWrite (high) in ROUTAD       
         ST $1C(2)
         LDI #$55        // Adr. von Push -1 (=0x0055) in Ptr III
         XPAL 3
@@ -169,9 +161,8 @@ LOOP    LD $10(2)     // Load address of SerialWrite (low) in ROUTAD
         XPAH 1
         LD (1)          // Load DataByte
         ST $07(2)
-       #// LD (1)          // Load DataByte
-
-        XPPC 3          // Byte ausgeben
+      
+        XPPC 3          // Out DataByte via SerialWrite
 
         LDI #$E0
         XPAL 2          // Pointer II auf Stackbase 
