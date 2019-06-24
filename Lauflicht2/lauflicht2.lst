@@ -1,0 +1,29 @@
+0000-                  2
+0000-                  3                        .CR     scmp                            //Select the intended overlay
+0000-                  4                .TF     Lauflicht2.hex,int
+0000-                  5                        .TF     Lauflicht2.bin,BIN
+0000-                  7
+0000-                  8                        #// .OR     $0001           //The SC/MP can't start at $0000 !
+2000-                  9                        .OR $2000
+2000-                 10                        .TA $0000
+2000-                 11
+2000-                 12
+Source file: c:\users\roland\source\sc_mp\lauflicht2\lauflicht2.asm
+
+*** Warning: Instruction starts at page boundary
+     13                 NOP
+
+2000-08               13 (   5)                 NOP
+2001-C4 11            14 (  10)         LDI    #$11
+2003-37               15 (   8)         XPAH 3
+2004-C4 00            16 (  10)         LDI #$00
+2006-33               17 (   8)         XPAL 3
+2007-C4 01            18 (  10) SETLED  LDI #$01
+2009-CB 00            19 (  18) .LOOP   ST (3)
+200B-1E               20 (   5)         RR
+200C-01               21 (   7)         XAE
+200D-8F FF            22 ( 13+)         DLY #$FF
+200F-40               23 (   6)         LDE
+2010-90 F7            24 (  11)         JMP .LOOP
+2012-                 25
+2012-                 26

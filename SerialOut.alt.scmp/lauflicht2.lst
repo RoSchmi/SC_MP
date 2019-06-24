@@ -1,0 +1,8 @@
+Source file: c:\users\roland\source\sc_mp\serialout.scmp\serialout.scmp.asm
+
+*** Error: Bad Operand
+     25         ST §FA(1)
+
+*** Error: Bad opcode
+     26         $F9ST (1)
+
