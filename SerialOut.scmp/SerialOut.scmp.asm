@@ -2,6 +2,11 @@
 # // This program for SC/MP (No fixed Startaddress, usually $2000)
 # // Writes part of the Ram content through the serial interface
 # // Baudrate = 600 and cannot be changed
+# // Monitor Software 'Elbug' has to be on the SC/MP
+
+# // Compiled with SB-Assembler
+# // https://github.com/sbprojects/sbasm3
+
 
         .LF     SerialOut.scmp.lst
 
@@ -45,10 +50,10 @@
     Nop
 
 #//**********************************************************
-SerialWrite       
-        LDI #$00        // Ptr I on LEDs
+SerialWrite              
+        LDI #$00        // DataByte is expected in Stackbase + 7
         XPAL 1
-        LDI #$11
+        LDI #$11        // Ptr I on LEDs
         XPAH 1      
         LDI #$D0        // Output Sync on LED4 (for tests)
         ST (1)             
@@ -71,7 +76,7 @@ SerialWrite
         LDI #$58        
         DLY $01
     
-        LD $07(2)       // get from Stackbase + 7  
+        LD $07(2)       // get DataByte from Stackbase + 7  
          
         XAE
 
